@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Django Weather App</title>
+    
+</head>
+
+<body style="background-color:rgb(3, 94, 179);">
+
+    {% load static %}
+
+    <nav class="navbar" style="background-color: #a2d2f5;">
+        <!-- Navbar content -->
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'weather2.jpg' %}" alt="" width="55" height="50" class="d-inline-block align-text-top">
+                Mahmud - Weather - App
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home2' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'register' %}">Register </a>
+                  </li>
+                  
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'logout' %}">Logout</a>
+                  </li>
+                </ul>
+                <br>
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+      </nav>
+
+      <h3 style="margin:auto ; width: 30%;padding-top: 5%; font-size: 40px; font-weight: bold; color: rgb(255, 255, 255);">Welcome <span style="color:rgb(249, 249, 95);">{{user.username}}</span></h3>
+      <h2 style="margin:auto ; width: 33%;padding-top: 1%; font-size: 40px; font-weight: bold; color: rgb(225, 139, 26);">Find your Weather here</h2>
+      <hr>
+      <h4 style="margin:auto ; width: 26%; font-size: 18px; font-weight: bold; color: rgb(0, 6, 114);">Developed by Monirul Islam Mahmud</h4>
+      <br><br><br>
+
+    <form method="post" class="col-md">
+        {% csrf_token %}
+        <div class=" input-group w-50 m-auto p-10">
+  
+            <input type="text" class="form-control" name="name" placeholder="Choose Your City ...">
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-dark">Search</button>
+            </div>
+        </div>
+    <form>
+
+
+
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+
+                    {% for city_weather in weather_data %}
+
+
+                    <div class="box" style="margin:auto ; padding-bottom: 10%; width: 26%; font-size: 18px; font-weight: bold; color: rgb(171, 168, 164);">
+                        <br><br><br>
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" style="width:90px" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content" style="color: rgb(255, 255, 255); font-size:22px;">
+                                    <p>
+                                        <span class="title">Country Code:  <span style="color: yellow;">{{ city_weather.city }}</span></span>
+                                        <br>
+                                        <span class="subtitle">Temperature: <span style="color: yellow;">{{ city_weather.temperature }}° C</span></span>
+                                        <br>Description:  <span style="color: yellow;">{{ city_weather.description }} </span> 
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+</body>
+</html>
